@@ -4,15 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-node src/main.ts",
+    "start": "node build/main.js",
+    "compile": "tsc -p .",
+    "api:build": "aspida"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@types/node": "^18.19.30",
     "eslint": "^9.0.0",
+    "globals": "^15.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.4"
+    "typescript": "^5.4.4",
+    "typescript-eslint": "^7.5.0"
+  },
+  "dependencies": {
+    "@aspida/axios": "^1.14.0",
+    "axios": "^1.6.8",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5"
   }
 }
