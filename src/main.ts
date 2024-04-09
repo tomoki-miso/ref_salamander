@@ -25,19 +25,6 @@ client.once("ready", () => {
   }
 });
 
-/// Notionからget
-async function getReference(): Promise<void> {
-  const { Client } = require("@notionhq/client");
-  const notion = new Client({
-    auth: process.env.NOTION,
-  });
-
-  const response = await notion.databases.retrieve({
-    database_id: process.env.DBID,
-  });
-  console.log(response);
-}
-
 /// Notionからadd
 async function addReference(
   title: string,
@@ -57,7 +44,6 @@ async function addReference(
       },
     });
 
-    console.log(response);
     console.log("Success! Entry added.");
   } catch (error) {
     console.error(error);
@@ -74,7 +60,9 @@ client.on("messageCreate", async (message: Message) => {
       messageArray[2],
       message.author.displayName
     );
-    message.channel.send("参照ウオ！");
+    message.channel.send(
+      "登録したよん👼\nhttps://www.notion.so/8d4b8fc1929a44e9b0016631dc635a0b?v=83fe71c4546d4c3b9e004e1c430d6888"
+    );
   } else {
     return;
   }

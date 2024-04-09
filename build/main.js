@@ -35,19 +35,6 @@ client.once("ready", () => {
         console.log(client.user.tag);
     }
 });
-/// Notionからget
-function getReference() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const { Client } = require("@notionhq/client");
-        const notion = new Client({
-            auth: process.env.NOTION,
-        });
-        const response = yield notion.databases.retrieve({
-            database_id: process.env.DBID,
-        });
-        console.log(response);
-    });
-}
 /// Notionからadd
 function addReference(title, url, tag) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -62,7 +49,6 @@ function addReference(title, url, tag) {
                     Tag: { multi_select: [{ name: tag }] },
                 },
             });
-            console.log(response);
             console.log("Success! Entry added.");
         }
         catch (error) {
@@ -77,7 +63,7 @@ client.on("messageCreate", (message) => __awaiter(void 0, void 0, void 0, functi
     if (message.content.includes("!ref")) {
         let messageArray = message.content.split(",");
         yield addReference(messageArray[1], messageArray[2], message.author.displayName);
-        message.channel.send("参照ウオ！");
+        message.channel.send("登録したよん👼\nhttps://www.notion.so/8d4b8fc1929a44e9b0016631dc635a0b?v=83fe71c4546d4c3b9e004e1c430d6888");
     }
     else {
         return;
