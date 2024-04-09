@@ -22,7 +22,7 @@
     "typescript-eslint": "^7.5.0"
   },
   "dependencies": {
-    "@aspida/axios": "^1.14.0",
+    "@notionhq/client": "^2.2.14",
     "axios": "^1.6.8",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5"
