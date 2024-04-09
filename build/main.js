@@ -35,15 +35,48 @@ client.once("ready", () => {
         console.log(client.user.tag);
     }
 });
-//!timeと入力すると現在時刻を返信するように
+/// Notionからget
+function getReference() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { Client } = require("@notionhq/client");
+        const notion = new Client({
+            auth: process.env.NOTION,
+        });
+        const response = yield notion.databases.retrieve({
+            database_id: process.env.DBID,
+        });
+        console.log(response);
+    });
+}
+/// Notionからadd
+function addReference(title, url, tag) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { Client } = require("@notionhq/client");
+        const notion = new Client({ auth: process.env.NOTION });
+        try {
+            const response = yield notion.pages.create({
+                parent: { database_id: process.env.DBID },
+                properties: {
+                    Name: { title: [{ text: { content: title } }] },
+                    URL: { url },
+                    Tag: { multi_select: [{ name: tag }] },
+                },
+            });
+            console.log(response);
+            console.log("Success! Entry added.");
+        }
+        catch (error) {
+            console.error(error);
+        }
+    });
+}
+/// Discordメッセージの処理
 client.on("messageCreate", (message) => __awaiter(void 0, void 0, void 0, function* () {
     if (message.author.bot)
         return;
-    if (message.content === "!time") {
-        const date1 = new Date();
-        message.channel.send(date1.toLocaleString());
-    }
-    else if (message.content.includes("!ref")) {
+    if (message.content.includes("!ref")) {
+        let messageArray = message.content.split(",");
+        yield addReference(messageArray[1], messageArray[2], message.author.displayName);
         message.channel.send("参照ウオ！");
     }
     else {
